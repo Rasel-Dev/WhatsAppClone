@@ -1,21 +1,31 @@
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React from 'react';
-import { useDispatch } from '../../contexts/Provider';
-import { RESET_APP, TOGGLE_MENU } from '../../contexts/actions';
+import React, { useCallback } from 'react';
+import { useDispatch } from '../../../contexts/Provider';
+import { RESET_APP, TOGGLE_MENU } from '../../../contexts/actions';
 import IconF from 'react-native-vector-icons/Feather';
-import colorString from '../../constants/colorString';
-import { useNavigation } from '@react-navigation/native';
-import { HomeScreenNavigationProps } from '../../routes/types';
+import colorString from '../../../constants/colorString';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackParamList } from '../../../routes/types';
 
 type Props = {
-  isShow: boolean;
+  screenCode: number;
 };
 
-const DropMenu = (props: Props) => {
-  const { dispatch } = useDispatch();
-  const navigation = useNavigation<HomeScreenNavigationProps>();
+const DropMenu = ({ screenCode }: Props) => {
+  const {
+    state: { toggleMenu },
+    dispatch,
+  } = useDispatch();
+  const navigation = useNavigation<NativeStackScreenProps<StackParamList, 'Home'>>();
 
-  const handleToggleMenu = () => dispatch({ type: TOGGLE_MENU });
+  useFocusEffect(
+    useCallback(() => {
+      return dispatch({ type: TOGGLE_MENU, payload: 0 });
+    }, [])
+  );
+
+  const handleToggleMenu = () => dispatch({ type: TOGGLE_MENU, payload: screenCode });
 
   const handleLogout = () => {
     dispatch({ type: RESET_APP });
@@ -23,7 +33,7 @@ const DropMenu = (props: Props) => {
   };
 
   return (
-    <View style={[styles.MenuSpaceDiv, { display: props.isShow ? 'flex' : 'none' }]}>
+    <View style={[styles.MenuSpaceDiv, { display: toggleMenu === screenCode ? 'flex' : 'none' }]}>
       <Pressable style={{ padding: 5 }} onPress={handleToggleMenu}>
         <IconF name="x" color="#ddd" size={18} />
       </Pressable>

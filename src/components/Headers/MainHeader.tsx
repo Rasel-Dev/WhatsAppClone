@@ -1,4 +1,4 @@
-import { Alert, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import colorString from '../../constants/colorString';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,8 +9,9 @@ type Props = {};
 
 const MainHeader = (props: Props) => {
   const { dispatch } = useDispatch();
+
   const handleToggleMenu = () => {
-    dispatch({ type: TOGGLE_MENU });
+    dispatch({ type: TOGGLE_MENU, payload: 1 });
   };
 
   return (
@@ -28,14 +29,14 @@ export default MainHeader;
 const styles = StyleSheet.create({
   HeaderDiv: {
     flexDirection: 'row',
-    height: 42,
     backgroundColor: colorString.MAIN,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   HeaderLogo: {
-    color: '#ddd',
+    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
   },

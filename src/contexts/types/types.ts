@@ -14,7 +14,7 @@ export type UserMessageType = {
 };
 
 export type InitStateType = {
-  toggleMenu: boolean;
+  toggleMenu: number;
   user: UserStateType;
   friends: string[];
   roomId: string;

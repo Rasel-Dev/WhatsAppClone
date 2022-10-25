@@ -4,7 +4,7 @@ import Reducer from './reducer';
 
 export const InitState = {
   // system
-  toggleMenu: false,
+  toggleMenu: 0,
   // others
   user: {
     id: 0,

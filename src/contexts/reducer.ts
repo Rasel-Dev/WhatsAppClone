@@ -7,7 +7,7 @@ const Reducer = (state: InitStateType, action: DispatchActionType): InitStateTyp
     case TOGGLE_MENU:
       return {
         ...state,
-        toggleMenu: !state.toggleMenu,
+        toggleMenu: action.payload === state.toggleMenu ? 0 : action.payload,
       };
     case INIT_USER:
       return state;

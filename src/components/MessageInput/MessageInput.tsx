@@ -1,5 +1,5 @@
 import { Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import colorString from '../../constants/colorString';
 import Icon from 'react-native-vector-icons/Feather';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,6 +7,10 @@ import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 type Props = {};
 
 const MessageInput = (props: Props) => {
+  const [message, setMessage] = useState('');
+
+  const inputHandler = (text: string) => setMessage(text);
+
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
       <View style={styles.MessageInputBox}>
@@ -17,13 +21,21 @@ const MessageInput = (props: Props) => {
           style={styles.InputField}
           placeholder="Message..."
           placeholderTextColor="#ddd"
-          onChangeText={() => {}}
+          value={message || ''}
+          onChangeText={inputHandler}
         />
         <Pressable>
           <Icon name="paperclip" size={18} color="#fff" />
         </Pressable>
       </View>
-      <Pressable style={styles.SendButton}>
+      <Pressable
+        style={[
+          styles.SendButton,
+          !!message.length
+            ? { backgroundColor: colorString.GREEN }
+            : { backgroundColor: colorString.MAIN },
+        ]}
+      >
         <Icon name="send" size={18} color="#fff" />
       </Pressable>
     </View>
@@ -51,7 +63,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     width: 35,
     height: 35,
-    backgroundColor: colorString.GREEN,
     borderRadius: 35,
     alignItems: 'center',
     justifyContent: 'center',

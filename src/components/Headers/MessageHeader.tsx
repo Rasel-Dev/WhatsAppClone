@@ -4,9 +4,10 @@ import colorString from '../../constants/colorString';
 import Icon from 'react-native-vector-icons/Feather';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import { HomeScreenNavigationProps } from '../../routes/types';
+import { StackParamList } from '../../routes/types';
 import { useDispatch } from '../../contexts/Provider';
 import { TOGGLE_MENU } from '../../contexts/actions';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type Props = {
   avatar: string;
@@ -15,10 +16,10 @@ type Props = {
 };
 
 const MessageHeader: React.FC<Props> = ({ avatar, username, timestamp }) => {
-  const navigation = useNavigation<HomeScreenNavigationProps>();
+  const navigation = useNavigation<NativeStackScreenProps<StackParamList, 'Home'>>();
   const { dispatch } = useDispatch();
   const handleToggleMenu = () => {
-    dispatch({ type: TOGGLE_MENU });
+    dispatch({ type: TOGGLE_MENU, payload: 2 });
   };
 
   const handleGoBack = () => {

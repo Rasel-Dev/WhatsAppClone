@@ -3,6 +3,7 @@ import { UserStateType } from './types';
 
 export interface IToggleMenu {
   type: typeof TOGGLE_MENU;
+  payload: number;
 }
 
 export interface IUser {

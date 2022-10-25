@@ -1,16 +1,13 @@
-import { Alert, Image, Keyboard, Text, View } from 'react-native';
+import { Image, Keyboard, Text, View } from 'react-native';
 import React from 'react';
 import styles from './styles';
-import { AuthScreenNavigationProps } from '../../routes/types';
+import { StackParamList } from '../../routes/types';
 import global from '../global';
 import InputText from '../../components/Inputs/TextInput';
 import AuthBtn from '../../components/Buttons/AuthBtn';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type Props = {
-  navigation: AuthScreenNavigationProps;
-};
-
-const Auth: React.FC<Props> = ({ navigation }) => {
+const Auth: React.FC<NativeStackScreenProps<StackParamList, 'Auth'>> = ({ navigation }) => {
   const [loading, setLoading] = React.useState(false);
   const [login, setLogin] = React.useState({ phone: '', username: '' });
   const [error, setError] = React.useState({ phone: '', username: '' });
